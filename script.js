@@ -1,33 +1,5 @@
 'use strict';
 
-// let
-// var
-// const
-/* let objectX = {
-    x1: 1,
-    x2: "str",
-    x3: true
-};   */
-// console.log();
-// alert();
-// confirm();
-// let x = confirm(); 
-// let x = prompt("", "");
-// typeof(x);
-// if () {} else if () {} else {};
-// (условие) ? если условие верно : если условие неверно;
-/* switch (x) {
-    case x < 0:
-        действие
-        break
-    case x > 0:
-        действие
-        break
-    default:
-        действие
-        break
-}   */
-
 let money = +prompt("Ваш бюджет в месяц", "0");
 let time = prompt("Введите дату в формате YYYY-MM-DD", "1970-01-01");
 
@@ -40,16 +12,47 @@ let appData = {
     saving: false
 };
 
-let answer1 = prompt("Введите обязательную статью расходов в этом месяце");
-let answer2 = +prompt("Во сколько обойдется?");
-let answer3 = prompt("Введите обязательную статью расходов в этом месяце");
-let answer4 = +prompt("Во сколько обойдется?");
+for (let i = 0; i < 2; i++){
+    let a = prompt("Введите обязательную статью расходов в этом месяце");
+    let b = +prompt("Во сколько обойдется?");
+    if ( typeof(a)=== "string" && typeof(a) != null && typeof(b) != null 
+        && a != '' && b != '' && a.length < 50) {
+        console.log('done');
+        appData.expenses[a] = b;
+    } else {
+        
+    } 
+}
 
-appData.expenses.answer1 = answer2;
-appData.expenses.answer3 = answer4;
+function detectDayBudget(){
+    return appData.budget / 30;
+}
 
-alert("Бюджет на один день = " + (answer2 + answer4)/30);
+let level = "не определён";
+function detectLevel() {
+    if (appData.moneyPerDay < 400) {
+        level = "низкий";} 
+    else if (appData.moneyPerDay >= 400 && appData.moneyPerDay < 2000) {
+        level = "средний";}
+    else if (appData.moneyPerDay >= 2000) {
+        level = "высокий";}
+    return level;  
+}
 
+function chooseOptExpenses(){
+    for (let i = 0; i < 3; i++){
+        let a = prompt("Статья необязательных расходов?");
+        appData.optionalExpenses[i] = a;
+    }
+}
+
+
+appData.moneyPerDay = detectDayBudget();
+detectLevel();
+
+
+alert("Бюджет на один день = " + appData.moneyPerDay);
+alert("Уровень дохода - " + level);
 
 
 
